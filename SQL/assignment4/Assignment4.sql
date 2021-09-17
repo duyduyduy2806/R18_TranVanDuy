@@ -70,7 +70,7 @@ GROUP BY	groupID;
 
 -- câu 11 : Thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM
 
-SELECT 			d.departmentName,p.positionName, GROUP_CONCAT(a.Full_name), COUNT(p.positionID)
+SELECT 			d.departmentName,p.positionName, GROUP_CONCAT(a.full_name), COUNT(p.positionID)
 FROM			Department d 
 JOIN			`Account` a  ON	 d.departmentID = a.departmentID
 JOIN			`Position`p  ON  a.positionID = p.positionID
@@ -110,5 +110,22 @@ WHERE			a.answerID IS NULL
 GROUP BY        q.content ;
 
 -- câu 17:  a) Lấy các account thuộc nhóm thứ 1 b) Lấy các account thuộc nhóm thứ 2 c) Ghép 2 kết quả từ câu a) và câu b) sao cho không có record nào trùng nhau   
-
+SELECT			ga.groupID , a.accountID , a.email , a.full_name
+FROM			`account` a
+JOIN			groupaccount ga ON a.accountID=ga.accountID
+UNION
+SELECT			ga.groupID , a.full_name, a.email, a.accountID	 
+FROM			 `Account` a 
+JOIN			GroupAccount  ga  ON  a.accountID = ga.accountID
+WHERE           ga.groupID  = 2
+GROUP BY 		a.full_name ; 
 -- câu 18:  a) Lấy các group có lớn hơn 5 thành viên b) Lấy các group có nhỏ hơn 7 thành viên c) Ghép 2 kết quả từ câu a) và câu b) 
+SELECT		g.groupID , g.groupName , count(ga.accountID)
+FROM		`group` g
+JOIN		GroupAccount ga ON g.groupID=ga.groupID
+UNION
+SELECT     	g.groupID, g.groupName, COUNT(ga.accountID)
+FROM		`group` g 
+JOIN		 GroupAccount ga   ON  g.groupID = ga.groupID
+GROUP BY  	 g.groupID 
+HAVING        COUNT(ga.accountID) < 7;
