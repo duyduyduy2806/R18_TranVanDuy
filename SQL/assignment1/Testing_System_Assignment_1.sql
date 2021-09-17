@@ -37,12 +37,13 @@ CREATE TABLE `Group`(
 	groupID				TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     groupName			VARCHAR(50) NOT NULL UNIQUE KEY,
     creatorID			TINYINT UNSIGNED,
-    createDate			DATETIME DEFAULT now()
+    createDate			DATETIME DEFAULT now(),
+    FOREIGN KEY (creatorID) REFERENCES `Account`(accountID)
 );
 -- Thêm bảng GroupAccount
 DROP TABLE IF EXISTS GroupAccount;
 CREATE TABLE GroupAccount(
-	groupID				TINYINT UNSIGNED UNSIGNED,
+	groupID				TINYINT UNSIGNED ,
     accountID			TINYINT UNSIGNED,
     joinDate			DATETIME DEFAULT NOW() ,
     FOREIGN KEY (groupID) REFERENCES `Group`(groupID),
