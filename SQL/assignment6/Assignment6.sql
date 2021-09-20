@@ -71,3 +71,10 @@ FROM	TypeQuestion
 WHERE	TypeID = @Type_ID;
  
 -- câu 6: Viết 1 store cho phép người dùng nhập vào 1 chuỗi và trả về group có tên chứa chuỗi của người dùng nhập vào hoặc trả về user có username chứa chuỗi của người dùng nhập vào 
+-- câu 7: Viết 1 store cho phép người dùng nhập vào thông tin fullName, email và trong store sẽ tự động gán:username sẽ giống email nhưng bỏ phần @..mail đi
+-- positionID: sẽ có default là developer departmentID: sẽ được cho vào 1 phòng chờ Sau đó in ra kết quả tạo thành công
+
+-- Question 11: Viết store cho phép người dùng xóa phòng ban bằng cách người dùng
+-- nhập vào tên phòng ban và các account thuộc phòng ban đó sẽ được
+-- chuyển về phòng ban default là phòng ban chờ việc
+
